@@ -62,6 +62,14 @@ Ahora el usuario podrá saber si su solicitud de adopción fue **aceptada o rech
 
 ---
 
+## ✅ Mejora: Extravíos
+
+Siguiendo la recomendación, un usuario puede publicar su mascota como desaparecida, **se registra la zona y se compara con la zona del albergue**, si coincide este aparece en el **panel de extravíos** para que el mismo albergue pueda recogerlo y contactar mediante su número telefónico con su posible dueño.
+
+> ⚠️ **Nota:** Para publicar una mascota como desaparecida se requiere un inicio de sesión, esto para evitar saturar el sistema o llenar el panel con publicaciones de mascotas desaparecidas falsas.
+
+---
+
 ## 🔐 Otras mejoras
 
 - **Credenciales fuera del código:** `api/conexion.php` ya no contiene contraseñas. Lee los datos de variables de entorno (producción) o de `api/config.php` (local, ignorado por Git).
