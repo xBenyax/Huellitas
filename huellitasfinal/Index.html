@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huellitas · Gestión de albergue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="brand-paw">🐾</span>
+      <span class="brand-name">Huellitas</span>
+    </div>
+
+    <nav class="nav-tabs" id="navTabs">
+      <button class="nav-tab active" data-view="inicio">Inicio</button>
+      <button class="nav-tab" data-view="mascotas">Mascotas</button>
+      <button class="nav-tab" data-view="espacios">Espacios</button>
+      <button class="nav-tab" data-view="saludAlbergue">Salud</button>
+      <button class="nav-tab" data-view="extravios">Extravíos</button>
+    </nav>
+
+    <div class="nav-actions">
+      <div class="search-box">
+        <input type="text" id="globalSearch" placeholder="Buscar mascota...">
+        <span class="search-icon">🐶</span>
+      </div>
+      <div class="account-area" id="accountArea"></div>
+    </div>
+
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú">☰</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="view active" id="view-inicio">
+
+    <div class="hero">
+      <div class="hero-deco hero-deco-left" aria-hidden="true">🍃</div>
+      <div class="hero-deco hero-deco-right" aria-hidden="true">🍃</div>
+      <div class="hero-sparkles" aria-hidden="true">
+        <span>✦</span><span>✦</span><span>❤</span><span>❤</span><span>🐾</span><span>🐾</span>
+      </div>
+
+      <div class="hero-animals" aria-hidden="true">
+        <span class="hero-animal dog">🐕</span>
+        <span class="hero-animal cat">🐈</span>
+        <span class="hero-animal cat2">🐈‍⬛</span>
+      </div>
+
+      <div class="hero-text">
+        <h1>¡Bienvenidos a<br>Huellitas!</h1>
+        <p class="hero-sub">Un hogar de paso, lleno de cariño, para cada huellita.</p>
+        <button class="btn-primary" id="ctaConoce">Conoce a nuestros amigos</button>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">Adopciones destacadas</h2>
+      <p class="section-sub">Estos peluditos están listos para encontrar un hogar. Toca su historia para conocerlos.</p>
+      <div class="cards-row" id="destacadosRow"></div>
+    </section>
+
+    <section class="section stats-section">
+      <h2 class="section-title">El albergue en números</h2>
+      <p class="section-sub">Información conectada a nuestra base de datos, actualizada en tiempo real.</p>
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-paw">🐾</div>
+          <p>Un hogar para cada huellita.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Nosotros</h4>
+          <a href="#">Ayuda</a>
+          <a href="#">FAQ</a>
+          <a href="#">Términos</a>
+          <a href="#">Política</a>
+        </div>
+        <div class="footer-col">
+          <h4>Albergues</h4>
+          <a href="#" id="footerGestorLink">🏠 Acceso para gestores</a>
+        </div>
+        <div class="footer-col">
+          <h4>Redes Sociales</h4>
+          <div class="footer-social">
+            <a href="#" class="social-circle">f</a>
+            <a href="#" class="social-circle">◎</a>
+            <a href="#" class="social-circle">t</a>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copy">© 2026 Huellitas — Sistema de gestión para albergues de perros y gatos.</p>
+    </footer>
+  </section>
+
+  <section class="view" id="view-mascotas">
+    <div class="page-head">
+      <h1>Adopta una huellita</h1>
+      <p>Elige entre nuestros perritos y gatitos en adopción. Toca una foto para ver su ficha, o toca su historia para solicitar la adopción directamente. <span class="paw-mini">🐾</span></p>
+    </div>
+
+    <div class="species-toggle">
+      <button class="toggle-btn active" data-species="perro">🐶 Perros en adopción</button>
+      <button class="toggle-btn" data-species="gato">🐱 Gatos en adopción</button>
+    </div>
+
+    <div class="mis-solicitudes-bar">
+      <button class="btn-outline" id="btnMisSolicitudes">📋 Mis solicitudes de adopción</button>
+    </div>
+
+    <div class="pets-grid" id="petsGrid"></div>
+  </section>
+
+  <section class="view" id="view-espacios">
+    <div class="page-head">
+      <h1 id="gestorAlbergueTitle">Panel de tu albergue</h1>
+      <p>Gestiona los animalitos, publica adopciones, revisa solicitudes y da seguimiento a los traspasos de tu albergue.</p>
+    </div>
+
+    <section class="section">
+      <div class="gestor-section-head">
+        <h2 class="section-title" style="text-align:left; margin:0;">🐶 Perros del albergue</h2>
+        <button class="add-mini-btn" id="btnAgregarPerro">+ Agregar perro</button>
+      </div>
+      <div class="pets-grid gestor-grid" id="gestorPerrosGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="gestor-section-head">
+        <h2 class="section-title" style="text-align:left; margin:0;">🐱 Gatos del albergue</h2>
+        <button class="add-mini-btn" id="btnAgregarGato">+ Agregar gato</button>
+      </div>
+      <div class="pets-grid gestor-grid" id="gestorGatosGrid"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">📋 Solicitudes de adopción</h2>
+      <p class="section-sub">Aprueba o rechaza las solicitudes que llegan de los adoptantes.</p>
+      <div id="gestorSolicitudesList"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🔁 Traspasos</h2>
+      <p class="section-sub">Seguimiento de traspasos solicitados hacia o desde otros albergues.</p>
+      <div id="gestorTraspasosList"></div>
+    </section>
+
+    <section class="section espacios-status">
+      <h2 class="section-title">Ocupación de tus espacios</h2>
+      <p class="section-sub">Caniles y gateras disponibles en tu albergue.</p>
+      <div id="albergueGroups"></div>
+    </section>
+  </section>
+
+  <section class="view" id="view-salud">
+    <div class="page-head">
+      <h1>Control de salud</h1>
+      <p>Ficha médica y calendario de vacunas de las mascotas que registraste como propias. Dueños y veterinarios pueden mantenerla al día.</p>
+    </div>
+
+    <div class="salud-layout">
+      <aside class="salud-list" id="saludList"></aside>
+
+      <div class="salud-detail" id="saludDetail">
+        <div class="empty-state">
+          <span class="empty-icon">🩺</span>
+          <p>Selecciona una mascota de la lista para ver su ficha médica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-saludAlbergue">
+    <div class="page-head">
+      <h1 id="saludAlbergueTitle">Salud de tu albergue</h1>
+      <p>Estado de salud de cada animalito del albergue. Toca una etiqueta para ver su ficha médica, registrar vacunas, tratamientos u observaciones.</p>
+    </div>
+
+    <div class="salud-leyenda">
+      <span class="estado-salud estado-tratamiento">En tratamiento</span>
+      <span class="estado-salud estado-observacion">En observación</span>
+      <span class="estado-salud estado-saludable">Saludable</span>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title" style="text-align:left;">🐶 Perros</h2>
+      <div class="pets-grid" id="saludPerrosGrid"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" style="text-align:left;">🐱 Gatos</h2>
+      <div class="pets-grid" id="saludGatosGrid"></div>
+    </section>
+  </section>
+
+  <section class="view" id="view-extravios">
+    <div class="page-head extravios-head">
+      <div>
+        <h1>Tablón de extravíos</h1>
+        <p>Reportes de mascotas perdidas y encontradas en la comunidad.</p>
+      </div>
+      <button class="btn-primary" id="btnNuevoReporte">+ Reportar mascota perdida</button>
+    </div>
+
+    <div class="board-grid" id="boardGrid"></div>
+  </section>
+
+</main>
+
+<div class="modal-overlay" id="modalAuth">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <span class="modal-paw">🐾</span>
+    <h2 class="modal-title" id="authTitle">Inicia sesión</h2>
+    <p class="modal-sub" id="authSub">Ingresa para adoptar, apadrinar y cuidar la salud de tus huellitas.</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-auth="login">Iniciar sesión</button>
+      <button class="auth-tab" data-auth="register">Crear cuenta</button>
+    </div>
+
+    <form id="formLogin" class="app-form">
+      <label>Nombre real
+        <input type="text" name="nombre_real" required placeholder="Ej. Maria Lopez">
+      </label>
+      <label>Contraseña
+        <input type="password" name="contrasena" required placeholder="••••••">
+      </label>
+      <button type="submit" class="btn-primary full">Entrar</button>
+      <p class="auth-hint">Cuenta de prueba: <b>Maria Lopez</b> · contraseña <b>1234</b></p>
+      <div class="google-divider" style="text-align:center;font-size:12px;margin:6px 0;">o</div>
+      <div id="googleBtnLogin" style="display:flex;justify-content:center;"></div>
+    </form>
+
+    <form id="formRegister" class="app-form" style="display:none;">
+      <label>Nombre real
+        <input type="text" name="nombre_real" required placeholder="Ej. Juan Perez">
+      </label>
+      <label>Correo Gmail (te enviaremos un correo de verificación)
+        <input type="email" name="correo" required pattern="[A-Za-z0-9._%+\-]+@gmail\.com" placeholder="ejemplo@gmail.com">
+      </label>
+      <div class="form-row">
+        <label>Zona en donde vives
+          <input type="text" name="zona" required placeholder="Ej. Sopocachi">
+        </label>
+        <label>Contraseña
+          <input type="password" name="contrasena" required placeholder="••••••">
+        </label>
+      </div>
+      <button type="submit" class="btn-primary full">Crear cuenta</button>
+      <div class="google-divider" style="text-align:center;font-size:12px;margin:6px 0;">o</div>
+      <div id="googleBtnRegister" style="display:flex;justify-content:center;"></div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalAuthGestor">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <span class="modal-paw">🏠</span>
+    <h2 class="modal-title">Acceso de gestores</h2>
+    <p class="modal-sub">Para personal de albergues aliados de Huellitas.</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-auth-gestor="login">Iniciar sesión</button>
+      <button class="auth-tab" data-auth-gestor="register">Crear cuenta</button>
+    </div>
+
+    <form id="formLoginGestor" class="app-form">
+      <label>Nombre real
+        <input type="text" name="nombre_real" required placeholder="Ej. Carla Rojas">
+      </label>
+      <label>Contraseña
+        <input type="password" name="contrasena" required placeholder="••••••">
+      </label>
+      <button type="submit" class="btn-primary full">Entrar</button>
+      <p class="auth-hint">Cuenta de prueba: <b>Carla Rojas</b> · contraseña <b>1234</b></p>
+    </form>
+
+    <form id="formRegisterGestor" class="app-form" style="display:none;">
+      <label>Nombre real
+        <input type="text" name="nombre_real" required placeholder="Ej. Carla Rojas">
+      </label>
+      <label>Nombre del albergue
+        <input type="text" name="nombre_albergue" required placeholder="Ej. Albergue Huellitas Sopocachi">
+      </label>
+      <div class="form-row">
+        <label>Código de acceso del albergue
+          <input type="text" name="codigo_acceso" required placeholder="Ej. 1">
+        </label>
+        <label>Contraseña
+          <input type="password" name="contrasena" required placeholder="••••••">
+        </label>
+      </div>
+      <button type="submit" class="btn-primary full">Crear cuenta de gestor</button>
+      <p class="auth-hint">Códigos de prueba disponibles: <b>1</b>, <b>2</b>, <b>3</b>.</p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalGestorMascota">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <h2 class="modal-title" id="gestorMascotaTitle">Agregar animal</h2>
+    <form id="formGestorMascota" class="app-form">
+      <input type="hidden" name="especie" id="gestorMascotaEspecie">
+      <label>Nombre del animal
+        <input type="text" name="nombre_mascota" required placeholder="Ej. Rocky">
+      </label>
+      <label>Foto (opcional — URL de la imagen)
+        <input type="text" name="foto" placeholder="https://i.ibb.co/xxxx/rocky.png">
+      </label>
+      <div class="form-row">
+        <label>Edad (años)
+          <input type="number" name="edad" min="0" required placeholder="Ej. 2">
+        </label>
+        <label>Género
+          <select name="genero" required>
+            <option value="macho">Macho</option>
+            <option value="hembra">Hembra</option>
+          </select>
+        </label>
+      </div>
+      <label>Espacio (canil / gatera)
+        <select name="id_espacio" id="gestorMascotaEspacio" required></select>
+      </label>
+      <button type="submit" class="btn-primary full">Agregar al albergue</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalPublicarAdopcion">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <h2 class="modal-title">Publicar en adopción</h2>
+    <p class="modal-sub" id="publicarAdopcionSub"></p>
+    <form id="formPublicarAdopcion" class="app-form">
+      <label>Descripción para adoptantes
+        <textarea name="descripcion" rows="3" required placeholder="Personalidad, cuidados especiales, historia..."></textarea>
+      </label>
+      <button type="submit" class="btn-primary full">Publicar adopción</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalTraspaso">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <h2 class="modal-title">Solicitar traspaso</h2>
+    <p class="modal-sub" id="traspasoSub"></p>
+    <form id="formTraspaso" class="app-form">
+      <label>Albergue destino
+        <select name="id_albergue_destino" id="traspasoAlbergueDestino" required></select>
+      </label>
+      <button type="submit" class="btn-primary full">Solicitar traspaso</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalMascota">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <div id="modalMascotaBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalSolicitud">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <span class="modal-paw">🐾</span>
+    <h2 class="modal-title">Solicitar adopción</h2>
+    <div id="solicitudBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalReporte">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <h2 class="modal-title">Reportar mascota perdida</h2>
+    <form id="formReporte" class="app-form">
+      <label>Nombre de la mascota
+        <input type="text" name="nombre_mascota" required placeholder="Ej. Toby">
+      </label>
+      <div class="form-row">
+        <label>Especie
+          <select name="especie" required>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+          </select>
+        </label>
+        <label>Fecha de pérdida
+          <input type="date" name="fecha_perdida" required>
+        </label>
+      </div>
+      <label>Zona donde se perdió
+        <input type="text" name="zona_perdida" required placeholder="Ej. Zona Sopocachi, La Paz">
+      </label>
+      <label>Descripción / señas particulares
+        <textarea name="descripcion" rows="3" required placeholder="Color, tamaño, collar, comportamiento..."></textarea>
+      </label>
+      <label>Contacto
+        <input type="text" name="contacto" required placeholder="Teléfono o WhatsApp">
+      </label>
+      <button type="submit" class="btn-primary full">Publicar en el tablón</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalEncuentro">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <h2 class="modal-title">Reportar avistamiento</h2>
+    <p class="modal-sub" id="encuentroSub"></p>
+    <form id="formEncuentro" class="app-form">
+      <label>Ubicación del avistamiento
+        <input type="text" name="ubicacion" required placeholder="Ej. Av. Arce, La Paz">
+      </label>
+      <label>Descripción
+        <textarea name="descripcion" rows="3" required placeholder="¿Cómo estaba el animal? ¿Qué hacía?"></textarea>
+      </label>
+      <label>Tu contacto
+        <input type="text" name="contacto" required placeholder="Teléfono o WhatsApp">
+      </label>
+      <button type="submit" class="btn-primary full">Enviar aviso</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalRegistrarMascota">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <span class="modal-paw">🐾</span>
+    <h2 class="modal-title" id="registrarMascotaTitle">Registrar mascota</h2>
+    <p class="modal-sub" id="registrarMascotaSub">Cuéntanos sobre tu huellita para llevar su ficha médica y calendario de vacunas.</p>
+    <form id="formRegistrarMascota" class="app-form">
+      <label>Nombre de la mascota
+        <input type="text" name="nombre_mascota" required placeholder="Ej. Pancho">
+      </label>
+      <label>Foto de la mascota (opcional — URL de la imagen)
+        <input type="text" name="foto" placeholder="https://i.ibb.co/xxxx/pancho.png">
+      </label>
+      <div class="form-row">
+        <label>Especie
+          <select name="especie" required>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+          </select>
+        </label>
+        <label>Género
+          <select name="genero" required>
+            <option value="macho">Macho</option>
+            <option value="hembra">Hembra</option>
+          </select>
+        </label>
+      </div>
+      <label>Edad (años)
+        <input type="number" name="edad" min="0" required placeholder="Ej. 3">
+      </label>
+      <button type="submit" class="btn-primary full">Registrar mascota</button>
+      <p class="auth-hint" id="registrarMascotaHint" style="display:none;">Cada usuario puede registrar hasta 5 mascotas.</p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalSaludMascota">
+  <div class="modal-card modal-card-wide">
+    <button class="modal-close" data-close>✕</button>
+    <div id="saludMascotaBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalSalud">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <h2 class="modal-title" id="saludModalTitle">Nuevo registro</h2>
+    <form id="formSalud" class="app-form">
+      <label>Tipo de registro
+        <select name="tipo" required>
+          <option value="Vacuna">Vacuna</option>
+          <option value="Tratamiento">Tratamiento</option>
+        </select>
+      </label>
+      <label>Nombre
+        <input type="text" name="nombre" required placeholder="Ej. Antirrábica / Desparasitación">
+      </label>
+      <div class="form-row">
+        <label>Fecha de inicio / aplicación
+          <input type="date" name="fecha_inicio" required>
+        </label>
+        <label>Fecha de fin (duración)
+          <input type="date" name="fecha_fin">
+        </label>
+      </div>
+      <label>Próxima dosis (solo vacunas)
+        <input type="date" name="fecha_proxima">
+      </label>
+      <label>Observaciones
+        <textarea name="observaciones" rows="2" placeholder="Reacciones, notas del veterinario..."></textarea>
+      </label>
+      <button type="submit" class="btn-primary full">Guardar</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalVerificar">
+  <div class="modal-card">
+    <button class="modal-close" id="verificarCerrar">✕</button>
+    <span class="modal-paw">✉️</span>
+    <h2 class="modal-title">Confirma tu correo</h2>
+    <p class="modal-sub" id="verificarSub"></p>
+    <form id="formVerificar" class="app-form">
+      <label>Código de 6 dígitos
+        <input type="text" name="codigo" class="code-input" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required autocomplete="one-time-code" placeholder="••••••">
+      </label>
+      <button type="submit" class="btn-primary full">Confirmar correo</button>
+      <button type="button" class="btn-link" id="btnReenviarCodigo">Reenviar código</button>
+      <button type="button" class="btn-link" id="btnVerificarDespues">Lo haré después</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalMisSolicitudes">
+  <div class="modal-card">
+    <button class="modal-close" data-close>✕</button>
+    <span class="modal-paw">📋</span>
+    <h2 class="modal-title">Mis solicitudes de adopción</h2>
+    <p class="modal-sub">Aquí ves si el albergue aún revisa tu solicitud, la aceptó o la denegó.</p>
+    <div id="misSolicitudesBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="script.js"></script>
+</body>
+</html>

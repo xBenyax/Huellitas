@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Huellitas</title>
+</head>
+<body>
+    <h2>Registro de Nuevo Usuario</h2>
+    <!-- Note la ruta 'backend/' en el action para que el formulario encuentre el archivo -->
+        <form action="api/registro.php" method="POST">
+        <label for="nombre_real">Nombre Real:</label><br>
+        <input type="text" id="nombre_real" name="nombre_real" required><br><br>
+
+        <label for="zona">Zona:</label><br>
+        <input type="text" id="zona" name="zona" required><br><br>
+
+        <label for="contrasena">Contraseña:</label><br>
+        <input type="password" id="contrasena" name="contrasena" required><br><br>
+
+        <label for="rol">Rol de Usuario:</label><br>
+        <select id="rol" name="rol">
+            <option value="PARTICULAR">Particular</option>
+            <option value="PERSONAL">Personal</option>
+            <option value="GESTOR_ALBERGUE">Gestor de Albergue</option>
+        </select><br><br>
+
+        <label for="id_albergue">ID de Albergue (Opcional):</label><br>
+        <input type="number" id="id_albergue" name="id_albergue"><br><br>
+
+        <button type="submit">Registrarse</button>
+    </form>
+</body>
+</html> 
